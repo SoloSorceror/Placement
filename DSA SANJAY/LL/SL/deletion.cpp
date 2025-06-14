@@ -23,7 +23,7 @@ void DeleteFromBeginning(Node*& head){
 
 void DeleteFromEnd(Node*& head){
 
-    if(head->next = nullptr){
+    if(head->next == nullptr){
         delete head;
         head = NULL;
     }else{
