@@ -130,5 +130,25 @@ Node* deleteNode(Node* root, int target){
 
 
 int main(){
+    int arr[] = {67,34,23,12,3,4,68,21};
+    Node *root = NULL;
 
+    for(int i = 0; i<8; i++){
+
+        root = insert(root, arr[i]);
+    }
+
+    deleteNode(root, 67);
+    inorder(root);
+    cout<<endl;
+    preorder(root);
+    cout<<endl;
+    postorder(root);
+    cout<<endl;
+    levelOrder(root);
+    cout<<endl;
+
+    searching(root, 68) ? cout<<"Present": cout<<"Absent";
+
+    return 0;
 }
