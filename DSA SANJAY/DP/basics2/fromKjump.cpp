@@ -1,32 +1,38 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int frogJumpK(vector<int> &heights, int k)
+int solveUtil(int index, vector<int> &height, vector<int> &dp, int k)
 {
-    int n = heights.size();
-    vector<int> dp(n, INT_MAX);
-    dp[0] = 0;
+    if (index == 0)
+        return 0;
 
-    for (int i = 1; i < n; i++)
+    if (dp[index] != -1)
+        return dp[index];
+    int min_steps = INT_MAX;
+
+    for (int i = 1; i <= k; i++)
     {
-        for (int j = 1; j <= k; j++)
+        if (index - i >= 0)
         {
-            if (i - j >= 0)
-            {
-                int cost = dp[i - j] + abs(heights[i] - heights[i - j]);
-                dp[i] = min(dp[i], cost);
-            }
+            int steps = solveUtil(index - i, height, dp, k) + abs(height[index] + height[index - i]);
+            min_steps = min(steps, min_steps);
         }
     }
+    return dp[index] = min_steps;
+}
 
-    return dp[n - 1];
+int solve(int n, vector<int> &height, int k)
+{
+    vector<int> dp(n, -1);
+    return solveUtil(n - 1, height, dp, k);
 }
 
 int main()
 {
-    vector<int> heights1 = {2, 1, 3, 5, 4};
-    cout << frogJumpK(heights1, 2) << endl; // Output: 2 (same as normal problem)
-
-    vector<int> heights2 = {10, 30, 40, 20};
-    cout << frogJumpK(heights2, 3) << endl; // Example with k=3
+    vector<int> height{30, 10, 60, 10, 60, 50};
+    int n = height.size();
+    int k = 2;
+    vector<int> dp(n, -1);               // Initialize a memoization array for the main function
+    cout << solve(n, height, k) << endl; // Print the result of the solve function
+    return 0;
 }
