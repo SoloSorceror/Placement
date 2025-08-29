@@ -14,7 +14,7 @@ int solveUtil(int index, vector<int> &height, vector<int> &dp, int k)
     {
         if (index - i >= 0)
         {
-            int steps = solveUtil(index - i, height, dp, k) + abs(height[index] + height[index - i]);
+            int steps = solveUtil(index - i, height, dp, k) + abs(height[index] - height[index - i]);
             min_steps = min(steps, min_steps);
         }
     }
